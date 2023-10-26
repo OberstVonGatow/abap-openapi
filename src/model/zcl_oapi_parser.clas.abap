@@ -1,7 +1,7 @@
 CLASS zcl_oapi_parser DEFINITION PUBLIC.
   PUBLIC SECTION.
     METHODS parse
-      IMPORTING iv_json TYPE string
+      IMPORTING iv_json          TYPE string
       RETURNING VALUE(rs_schema) TYPE zif_oapi_specification_v3=>ty_specification.
 
   PRIVATE SECTION.
@@ -14,30 +14,30 @@ CLASS zcl_oapi_parser DEFINITION PUBLIC.
       RETURNING VALUE(rt_servers) TYPE zif_oapi_specification_v3=>ty_servers.
 
     METHODS parse_parameters
-      IMPORTING iv_prefix TYPE string
+      IMPORTING iv_prefix            TYPE string
       RETURNING VALUE(rt_parameters) TYPE zif_oapi_specification_v3=>ty_parameters.
 
     METHODS parse_parameters_ref
-      IMPORTING iv_prefix TYPE string
+      IMPORTING iv_prefix            TYPE string
       RETURNING VALUE(rt_parameters) TYPE string_table.
 
     METHODS parse_responses
-      IMPORTING iv_prefix TYPE string
+      IMPORTING iv_prefix           TYPE string
       RETURNING VALUE(rt_responses) TYPE zif_oapi_specification_v3=>ty_responses.
 
     METHODS parse_media_types
-      IMPORTING iv_prefix TYPE string
+      IMPORTING iv_prefix             TYPE string
       RETURNING VALUE(rt_media_types) TYPE zif_oapi_specification_v3=>ty_media_types.
 
     METHODS parse_components
       RETURNING VALUE(rs_components) TYPE zif_oapi_specification_v3=>ty_components.
 
     METHODS parse_schema
-      IMPORTING iv_prefix TYPE string
+      IMPORTING iv_prefix        TYPE string
       RETURNING VALUE(ri_schema) TYPE REF TO zif_oapi_schema.
 
     METHODS parse_schemas
-      IMPORTING iv_prefix TYPE string
+      IMPORTING iv_prefix         TYPE string
       RETURNING VALUE(rt_schemas) TYPE zif_oapi_specification_v3=>ty_schemas.
 
 ENDCLASS.
@@ -145,6 +145,8 @@ CLASS zcl_oapi_parser IMPLEMENTATION.
     LOOP AT lt_paths INTO lv_path.
       CLEAR ls_operation.
       ls_operation-path = lv_path.
+      ls_operation-path = replace( val = ls_operation-path regex = '\{[^}]*\}' with = space ).
+
       lt_methods = mo_json->members( '/paths/' && lv_path && '/' ).
       LOOP AT lt_methods INTO lv_method.
         ls_operation-method = lv_method.

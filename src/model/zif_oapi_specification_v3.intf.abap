@@ -32,13 +32,13 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
   TYPES ty_responses TYPE STANDARD TABLE OF ty_response WITH DEFAULT KEY.
 
   TYPES: BEGIN OF ty_operation,
-           path           TYPE string,
-           method         TYPE string,
-           summary        TYPE string,
-           description    TYPE string,
-           operation_id   TYPE string,
-           deprecated     TYPE abap_bool,
-           abap_name      TYPE string,
+           path            TYPE string,
+           method          TYPE string,
+           summary         TYPE string,
+           description     TYPE string,
+           operation_id    TYPE string,
+           deprecated      TYPE abap_bool,
+           abap_name       TYPE string,
            body_schema     TYPE REF TO zif_oapi_schema,
            body_schema_ref TYPE string,
            parameters      TYPE ty_parameters,
@@ -72,8 +72,8 @@ INTERFACE zif_oapi_specification_v3 PUBLIC.
          END OF ty_components.
 
   TYPES: BEGIN OF ty_info,
-           title TYPE string,
-           version TYPE string,
+           title       TYPE string,
+           version     TYPE string,
            description TYPE string,
          END OF ty_info.
 
