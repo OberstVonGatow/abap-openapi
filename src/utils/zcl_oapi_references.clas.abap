@@ -156,10 +156,16 @@ CLASS zcl_oapi_references IMPLEMENTATION.
     lt_copy = ms_spec-components-schemas.
     CLEAR ms_spec-components-schemas.
     WHILE lo_graph->is_empty( ) = abap_false.
-      lv_name = lo_graph->pop( ).
-      READ TABLE lt_copy INTO ls_copy WITH KEY name = lv_name.
-      ASSERT sy-subrc = 0.
-      INSERT ls_copy INTO ms_spec-components-schemas INDEX 1.
+      TRY.
+          lv_name = lo_graph->pop( ).
+          READ TABLE lt_copy INTO ls_copy WITH KEY name = lv_name.
+          ASSERT sy-subrc = 0.
+          INSERT ls_copy INTO ms_spec-components-schemas INDEX 1.
+        CATCH zcx_oapi_graph_cycle INTO DATA(lo_exc).
+
+
+      ENDTRY.
+
     ENDWHILE.
 
   ENDMETHOD.
