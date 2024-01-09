@@ -4,7 +4,7 @@
   <asx:values>
    <VSEOCLASS>
     <CLSNAME>ZCL_OAPI_GENERATOR_V2</CLSNAME>
-    <LANGU>E</LANGU>
+    <LANGU>D</LANGU>
     <DESCRIPT>abap-openapi-client</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
